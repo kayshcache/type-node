@@ -1,27 +1,26 @@
 import * as express from 'express';
 import * as mongoose from 'mongoose';
-import * as bodyParser from 'body-parser';
 import routes from './src/routes/crmRoutes';
 import Messenger from './src/controllers/createMessage';
 import { Settings } from './settings';
 import * as dotenv from 'dotenv';
 dotenv.config();
-const dbUserPass = process.env.DB_CREDENTIALS;
+const dbUserPass: string = process.env.DB_CREDENTIALS;
 
-const app = express();
+const app: any = express();
 
-// instance of messager class
+// instance of messenger class
 let messages = new Messenger(Settings.PORT);
 
-// Mongoose connection
+// Mongoose connection to Mongo Atlas
 mongoose.connect(`mongodb+srv://${dbUserPass}@coder-g8zwo.gcp.mongodb.net/test?retryWrites=true&w=majority`, {
 	useUnifiedTopology: true,
 	useNewUrlParser: true,
 });
 
-// Body Parser setup
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// Body Parser bundled with Express @4.16+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 routes(app);
 
@@ -29,12 +28,12 @@ interface Name {
 	firstName: string;
 }
 
-//function with interface
+// Example function with interface
 const nameCreator = (name: Name): string => {
 	return `Hello, ${name.firstName},`;
 }
 
-let myName = {firstName: 'Manny'};
+let myName = {firstName: 'Stickman'};
 
 // Serving static files
 app.use(express.static('public'));
@@ -46,3 +45,4 @@ app.get('/', (req, res) =>
 app.listen(Settings.PORT, () =>
 	console.log(nameCreator(myName), messages.messagePrint())
 );
+
