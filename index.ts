@@ -30,10 +30,10 @@ interface Name {
 
 // Example function with interface
 const nameCreator = (name: Name): string => {
-	return `Hello, ${name.firstName},`;
+	return `Hi ${name.firstName},`;
 }
 
-let myName = {firstName: 'Stickman'};
+let myName = {firstName: 'Tin-tin'};
 
 // Serving static files
 app.use(express.static('public'));

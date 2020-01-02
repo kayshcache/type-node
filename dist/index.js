@@ -22,9 +22,9 @@ app.use(express.json());
 crmRoutes_1.default(app);
 // Example function with interface
 const nameCreator = (name) => {
-    return `Hello, ${name.firstName},`;
+    return `Hi ${name.firstName},`;
 };
-let myName = { firstName: 'Stickman' };
+let myName = { firstName: 'Tin-tin' };
 // Serving static files
 app.use(express.static('public'));
 app.get('/', (req, res) => res.send(messages.messagePrint()));
